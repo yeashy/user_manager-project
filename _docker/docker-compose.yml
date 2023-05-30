@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+
+  php:
+    build: ./php
+    volumes:
+      - ../app:/var/www/user_manager-project
+    working_dir: /var/www
+  db:
+    build: ./db
+    restart: always
+    environment:
+      - MARIADB_ROOT_PASSWORD=123456
+    volumes:
+      - ./databases:/var/lib/mysql
+    ports:
+      - "3306:3306"
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "6080:8080"
+  nginx:
+    build: ./nginx
+    tty: true
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../app:/var/www/user_manager-project
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx/ssl/:/etc/nginx/ssl/
