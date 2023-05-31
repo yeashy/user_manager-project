@@ -14,4 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', IndexController::class);
+Route::view('/', 'pages.index');
+
+Route::view('/login', 'pages.login');
+Route::view('/register', 'pages.register');

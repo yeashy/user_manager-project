@@ -6,5 +6,7 @@
 <div class="content_wrapper">
     @yield('content')
 </div>
+
+@yield('bottom-scripts')
 </body>
 </html>
