@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,5 +17,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'pages.index');
 
-Route::view('/login', 'pages.login');
-Route::view('/register', 'pages.register');
+Route::middleware('guest')->prefix('auth')->as('auth.')->namespace('App\Http\Controllers')->group(function () {
+    Route::get('/register', 'RegisterController@show')->name('register.show');
+    Route::post('/register', 'RegisterController@register')->name('register.perform');
+
+    Route::get('/login', 'LoginController@show')->name('login.show');
+    Route::post('/login', 'LoginController@login')->name('login.perform');
+});
+
+Route::middleware('auth')->group(function () {
+   Route::post('/auth/logout', [LoginController::class, 'logout'])->name('auth.logout');
+});

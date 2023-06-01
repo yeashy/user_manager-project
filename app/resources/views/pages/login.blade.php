@@ -4,9 +4,10 @@
 
 @section('content')
     <div class="container">
-        <form action="{{ route('auth.login') }}" method="post">
+        <form action="{{ route('auth.login.perform') }}" method="post">
             <div class="card card-body">
                 <h4 class="card-title">Войти</h4>
+                @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>
                     <input type="email" class="form-control" id="email" placeholder="example@email.com" name="email" required>
@@ -19,7 +20,7 @@
 
             <div class="card-footer d-flex justify-content-between">
                 <button type="submit" class="btn btn-success">Войти</button>
-                <a href="/register" class="btn btn-secondary">Зарегистрироваться</a>
+                <a href="/auth/register" class="btn btn-secondary">Зарегистрироваться</a>
             </div>
         </form>
     </div>

@@ -1,7 +1,7 @@
 @php
-    use Illuminate\Support\Facades\Auth;
-    $user = Auth::user();
+    $user = auth()->user()
 @endphp
+
 <header class="mb-4 shadow">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
@@ -19,21 +19,28 @@
                         <span class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/">Домой</a>
                         </span>
-                        @if($user)
+                        @auth
                             <span class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/request/list">Мои обращения</a>
                             </span>
-                        @endif
+                        @endauth
                     </div>
-                    <div class="auth mx-4">
-                        @if($user)
-                            <img src="{{ asset('images/person.svg') }}" alt="{{ $user->getAuthIdentifierName() }}" class="img-thumbnail"
+                    <div class="auth mx-4 d-flex align-items-center">
+                        @auth
+                            <img src="{{ asset('images/person.svg') }}" alt="{{ $user->name }}"
+                                 class="img-thumbnail"
                                  style="width: 50px; height: 50px">
-                        @else
+                            <form action="{{ route('auth.logout') }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-link text-dark text-decoration-none">Выйти</button>
+                            </form>
+                        @endauth
+
+                        @guest
                             <span class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/login">Войти</a>
+                                <a class="nav-link active" aria-current="page" href="/auth/login">Войти</a>
                             </span>
-                        @endif
+                        @endguest
                     </div>
                 </ul>
             </div>
