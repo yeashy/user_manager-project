@@ -25,6 +25,7 @@ class LoginController extends Controller
         if(!Auth::validate($credentials)):
             return redirect()->to('login')
                 ->withErrors(trans('auth.failed'));
+        // TODO: изменить ошибку
         endif;
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);

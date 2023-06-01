@@ -1,4 +1,6 @@
+@php use App\Models\User; @endphp
 @php
+    /** @var User $user */
     $user = auth()->user()
 @endphp
 
@@ -20,9 +22,11 @@
                             <a class="nav-link active" aria-current="page" href="/">Домой</a>
                         </span>
                         @auth
-                            <span class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/request/list">Мои обращения</a>
-                            </span>
+                            @if($user->hasPermission('write_an_appeals'))
+                                <span class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="/appeals">Мои обращения</a>
+                                </span>
+                           @endif
                         @endauth
                     </div>
                     <div class="auth mx-4 d-flex align-items-center">

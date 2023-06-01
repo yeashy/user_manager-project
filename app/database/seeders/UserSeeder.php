@@ -25,6 +25,7 @@ class UserSeeder extends Seeder
         ],
         [
             'name' => 'Клиент Клиентович',
+            // TODO: email to gmail
             'email' => 'client@email.com',
             'password' => 'client123',
             'roles' => ['client']
