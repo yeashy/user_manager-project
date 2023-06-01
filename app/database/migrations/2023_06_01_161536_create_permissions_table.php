@@ -20,8 +20,8 @@ return new class extends Migration
         });
 
         Schema::create('role_permission', function (Blueprint $table) {
-            $table->foreignIdFor(Role::class)->constrained()->onDelete('NO ACTION')->onUpdate('NO ACTION');
-            $table->foreignIdFor(Permission::class)->constrained()->onDelete('NO ACTION')->onUpdate('NO ACTION');
+            $table->foreignIdFor(Role::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignIdFor(Permission::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
