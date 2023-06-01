@@ -35,7 +35,27 @@ class User extends Authenticatable
 
     /* Methods */
 
-    public function hasPermission(Permission $permission): bool
+    public function hasPermission(Permission|string $permission): bool
+    {
+        if (gettype($permission) === 'string') {
+            return $this->hasStringPermission($permission);
+        } else {
+            return $this->hasObjectPermission($permission);
+        }
+    }
+
+    private function hasStringPermission(string $permission): bool
+    {
+        foreach ($this->roles as $role) {
+            if ($role->permissions->where('code', $permission)->first()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function hasObjectPermission(Permission $permission): bool
     {
         foreach ($this->roles as $role) {
             if ($role->permissions->contains($permission)) {
