@@ -27,6 +27,12 @@
                                     <a class="nav-link active" aria-current="page" href="/appeals">Мои обращения</a>
                                 </span>
                            @endif
+
+                            @if($user->hasPermission('answer_to_appeals'))
+                                    <span class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="/client-appeals">Обращения и ответы</a>
+                                </span>
+                            @endif
                         @endauth
                     </div>
                     <div class="auth mx-4 d-flex align-items-center">

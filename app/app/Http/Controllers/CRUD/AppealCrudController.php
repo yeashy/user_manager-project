@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\CRUD;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateAppealRequest;
 use App\Models\Appeal;
 use App\Models\User;

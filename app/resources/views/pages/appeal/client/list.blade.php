@@ -21,7 +21,7 @@
         </div>
 
         @forelse($appeals as $appeal)
-            <div class="card p-2 mb-3">
+            <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title mb-2 d-flex">
                         {{$appeal->subject}}
@@ -47,21 +47,6 @@
             </div>
         @endforelse
 
-        @if($totalPages > 1)
-            <nav>
-                <ul class="pagination d-flex justify-content-center">
-                    @foreach(range($currentPage - 2, $currentPage + 2) as $page)
-                        @if($page <= 0 || $page > $totalPages)
-                            @continue
-                        @endif
-                        <li class="page-item @if($page === $currentPage)disabled @endif">
-                            <a href="/appeals?page={{$page}}" class="page-link disabled">
-                                {{$page}}
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            </nav>
-        @endif
+        @include('partials.pagination')
     </div>
 @endsection
