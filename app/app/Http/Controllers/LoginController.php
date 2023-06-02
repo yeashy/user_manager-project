@@ -22,11 +22,10 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if(!Auth::validate($credentials)):
-            return redirect()->to('login')
-                ->withErrors(trans('auth.failed'));
-        // TODO: изменить ошибку
-        endif;
+        if(!Auth::validate($credentials)) {
+            return redirect()->to('/auth/login')
+                ->with('error', 'Неверный логин или пароль');
+        }
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
 

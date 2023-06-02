@@ -4,17 +4,7 @@
 
 @section('content')
     <div class="container">
-        @if($message)
-            <div class="alert alert-success">
-                {{ $message }}
-            </div>
-        @endif
-
-        @if($error)
-            <div class="alert alert-success">
-                {{ $error }}
-            </div>
-        @endif
+        @include('partials.alerts', ['error' => $error, 'message' => $message])
 
         <div class="btns-wrapper d-flex w-100 justify-content-end mb-3">
             <a href="/appeals/create" class="btn btn-primary">Создать обращение</a>
@@ -27,7 +17,9 @@
                         {{$appeal->subject}}
                     </h5>
                     <p class="mb-0 text-muted">
-                       {{substr($appeal->text, 0, 100)}}@if(strlen($appeal->text) > 100)...@endif
+                        {{substr($appeal->text, 0, 100)}}@if(strlen($appeal->text) > 100)
+                            ...
+                        @endif
                     </p>
                 </div>
                 <div class="card-footer d-flex justify-content-between">

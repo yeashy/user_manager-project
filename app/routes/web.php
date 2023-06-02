@@ -5,6 +5,7 @@ use App\Http\Controllers\AppealController;
 use App\Http\Controllers\CRUD\AnswerCrudController;
 use App\Http\Controllers\CRUD\AppealCrudController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,13 +21,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'pages.index');
 
-Route::middleware('guest')->prefix('auth')->as('auth.')->namespace('App\Http\Controllers')->group(function () {
-    Route::get('/register', 'RegisterController@show')->name('register.show');
-    Route::post('/register', 'RegisterController@register')->name('register.perform');
-    //TODO: remove namespace
+Route::middleware('guest')->prefix('auth')->as('auth.')->group(function () {
+    Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
+    Route::post('/register', [RegisterController::class, 'register'])->name('register.perform');
 
-    Route::get('/login', 'LoginController@show')->name('login.show');
-    Route::post('/login', 'LoginController@login')->name('login.perform');
+    Route::get('/login', [LoginController::class, 'show'])->name('login.show');
+    Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
 });
 
 Route::middleware('auth')->group(function () {

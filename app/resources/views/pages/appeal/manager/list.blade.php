@@ -4,17 +4,7 @@
 
 @section('content')
     <div class="container">
-        @if($message)
-            <div class="alert alert-success">
-                {{ $message }}
-            </div>
-        @endif
-
-        @if($error)
-            <div class="alert alert-success">
-                {{ $error }}
-            </div>
-        @endif
+        @include('partials.alerts', ['error' => $error, 'message' => $message])
 
         @include('partials.appeal.manager.filters')
 
@@ -25,11 +15,17 @@
                         {{$appeal->subject}}
                     </h5>
                     <p class="mb-0 text-muted">
-                        {{substr($appeal->text, 0, 100)}}@if(strlen($appeal->text) > 100)...@endif
+                        {{substr($appeal->text, 0, 100)}}@if(strlen($appeal->text) > 100)
+                            ...
+                        @endif
                     </p>
                 </div>
                 <div class="card-footer d-flex justify-content-between align-items-center">
-                    <a href="/client-appeals/{{$appeal->id}}" class="btn btn-success">@if($appeal->is_answered)Посмотреть ответ@elseОтветить@endif</a>
+                    <a href="/client-appeals/{{$appeal->id}}" class="btn btn-success">@if($appeal->is_answered)
+                            Посмотреть ответ
+                        @else
+                            Ответить
+                        @endif</a>
                     <span class="text-secondary">{{$appeal->created_at}}</span>
                 </div>
             </div>

@@ -37,12 +37,13 @@
                     </div>
                     <div class="auth mx-4 d-flex align-items-center">
                         @auth
+                            <span class="mx-3">{{$user->name}}</span>
                             <img src="{{ asset('images/person.svg') }}" alt="{{ $user->name }}"
                                  class="img-thumbnail"
                                  style="width: 50px; height: 50px">
                             <form action="{{ route('auth.logout') }}" method="post">
                                 @csrf
-                                <button type="submit" class="btn btn-link text-dark text-decoration-none">Выйти</button>
+                                <button type="submit" class="btn btn-link text-danger text-decoration-none">Выйти</button>
                             </form>
                         @endauth
 

@@ -1,16 +1,18 @@
 @extends('layouts.default')
 
-@section('title', "Зарегистрироваться")
+@section('title', "Войти")
 
 @section('content')
     <div class="container">
+        @include('partials.alerts')
+
         <form action="{{ route('auth.login.perform') }}" method="post">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Войти</h4>
                     @csrf
                     <div class="mb-3 form-floating">
-                        <input type="email" class="form-control" id="email" placeholder="example@email.com" name="email" required>
+                        <input type="email" class="form-control" id="email" placeholder="example@email.com" name="email" required value="{{old('email')}}">
                         <label for="email" class="form-label">E-mail</label>
                     </div>
                     <div class="mb-3 form-floating">
