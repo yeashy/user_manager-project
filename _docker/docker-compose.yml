@@ -6,7 +6,7 @@ services:
     build: ./php
     volumes:
       - ../app:/var/www/user_manager-project
-    working_dir: /var/www
+    working_dir: /var/www/user_manager-project
   db:
     build: ./db
     restart: always
