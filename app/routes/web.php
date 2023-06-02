@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppealController;
+use App\Http\Controllers\AppealCrudController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
@@ -31,9 +32,14 @@ Route::middleware('auth')->group(function () {
    Route::post('/auth/logout', [LoginController::class, 'logout'])->name('auth.logout');
 });
 
-Route::middleware('hasPermission:write_an_appeals')->group(function () {
+Route::middleware(['hasPermission:write_an_appeals', 'auth'])->group(function () {
    Route::prefix('appeals')->as('appeals.')->group(function () {
-       Route::get('/', [AppealController::class, 'list']);
-       Route::get('/create', [AppealController::class, 'new']);
+       Route::get('/', [AppealController::class, 'list'])->name('list');
+       Route::get('/create', [AppealController::class, 'new'])->name('new');
+
+       Route::get('/{id}', [AppealCrudController::class, 'read'])->name('read');
+       Route::post('/create', [AppealCrudController::class, 'create'])->name('create');
+       Route::put('/{id}', [AppealCrudController::class, 'update'])->name('update');
+       Route::delete('/{id}', [AppealCrudController::class, 'delete'])->name('delete');
    });
 });

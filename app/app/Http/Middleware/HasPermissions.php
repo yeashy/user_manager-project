@@ -18,6 +18,10 @@ class HasPermissions
      */
     public function handle(Request $request, Closure $next, ...$permissions): Response
     {
+        if (!$request->user()) {
+            return redirect()->back();
+        }
+
         foreach ($permissions as $permission) {
             if (!$request->user()->hasPermission($permission)) {
                 return redirect()->back();

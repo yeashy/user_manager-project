@@ -17,6 +17,12 @@ class Appeal extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'subject',
+        'text',
+        'email_to'
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

@@ -17,7 +17,7 @@
             </button>
             <div class="collapse navbar-collapse " id="navbarNav">
                 <ul class="navbar-nav d-flex justify-content-between w-100">
-                    <div class="links d-flex">
+                    <div class="links d-flex align-items-center">
                         <span class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/">Домой</a>
                         </span>
