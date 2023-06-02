@@ -10,7 +10,7 @@
 5. Ставим пакеты - `composer install`
 6. Генерим ключ - `php artisan key:generate`
 7. По желанию можно линкануть хранилище - `php artisan storage:link`
-8. Создаем `.env` - `cp .env.example .env`, можно ничего не менять, так как в экзамле уже все настроено для работы, кроме смтп
+8. Создаем `.env` - `cp .env.example .env`, можно ничего не менять, так как в экзампле уже все настроено для работы, кроме смтп
 9. Запускаем миграции и сиды - `php artisan migrate --seed`
 10. По желанию можно запустить очередь - `php artisan queue:work --queue=high,medium,low`
 11. Открываем в браузере `http://localhost:80`, и все готово
