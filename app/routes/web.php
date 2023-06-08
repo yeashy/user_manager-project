@@ -43,7 +43,6 @@ Route::middleware(['hasPermission:write_an_appeals', 'auth'])->prefix('appeals')
    Route::delete('/{id}', [AppealCrudController::class, 'delete'])->name('delete');
 });
 
-
 Route::middleware(['hasPermission:answer_to_appeals', 'auth'])->prefix('client-appeals')->as('answer.')->group(function () {
     Route::get('/', [AnswerController::class, 'listAppeals'])->name('list');
 
