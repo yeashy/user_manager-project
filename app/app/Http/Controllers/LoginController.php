@@ -6,7 +6,6 @@ use App\Http\Requests\LoginRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -31,7 +30,7 @@ class LoginController extends Controller
 
         Auth::login($user);
 
-        return $this->authenticated($request, $user);
+        return $this->authenticated();
     }
 
     public function logout(): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
@@ -43,7 +42,7 @@ class LoginController extends Controller
         return redirect('/auth/login');
     }
 
-    protected function authenticated(Request $request, $user): RedirectResponse
+    protected function authenticated(): RedirectResponse
     {
         return redirect()->intended();
     }

@@ -2,22 +2,15 @@
 
 namespace App\Services;
 
+use App\Enums\MailMessageType;
 use App\Enums\QueuePriority;
 use App\Jobs\SendAnswerToAppealMail;
+use App\Services\Factories\MailMessageFactory;
 
 class MailService
 {
-    public function __construct(
-        private string $text,
-        private string $subject,
-        private string $email_to,
-    )
+    public function send(MailMessageType $messageType, array $params): void
     {
-    }
-
-    public function send(): void
-    {
-        // стоит переделать в фабрику, но тут с сериализацией проблемы пойдут возможно
-        SendAnswerToAppealMail::dispatch($this->subject, $this->text, $this->email_to)->onQueue(QueuePriority::Medium->value);
+        (new MailMessageFactory())($messageType, $params);
     }
 }
